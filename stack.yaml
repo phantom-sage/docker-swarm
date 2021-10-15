@@ -1,13 +1,13 @@
 version: "3.7"
 services:
-  whoami:
-    image: training/whoami:latest
+  web:
+    image: nginx:1.12-alpine
     networks:
-      - test-net
+      - web-net
     ports:
-      - 81:8000
+      - 82:80
     deploy:
-      replicas: 6
+      replicas: 10
       update_config:
         parallelism: 2
         delay: 10s
@@ -15,5 +15,5 @@ services:
         app: sample-app
         environment: prod-south
 networks:
-  test-net:
+  web-net:
     driver: overlay
